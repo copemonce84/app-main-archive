@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pg游戏 · 知识库入口</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background-color: #f4f7fc;
+            color: #1e2a3a;
+            line-height: 1.7;
+        }
+
+        /* 深色头图 hero */
+        .hero {
+            background: linear-gradient(145deg, #0b141f 0%, #192a3e 100%);
+            padding: 5rem 2rem 4rem;
+            text-align: center;
+            color: #e5edf5;
+            border-bottom: 4px solid #3b82f6;
+        }
+
+        .hero h1 {
+            font-size: 2.6rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            margin-bottom: 0.75rem;
+        }
+
+        .hero h1 span {
+            color: #6ab0ff;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 680px;
+            margin: 1rem auto 0.5rem;
+            opacity: 0.88;
+        }
+
+        .hero .badge {
+            display: inline-block;
+            margin-top: 1.6rem;
+            background: rgba(59, 130, 246, 0.2);
+            border: 1px solid #3b82f6;
+            padding: 0.4rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            color: #aacbff;
+            letter-spacing: 0.5px;
+        }
+
+        /* 浅色正文区 */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2.5rem 1.5rem 4rem;
+        }
+
+        /* 目录感布局：卡片网格 */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin: 2.5rem 0 3rem;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 1.8rem 1.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03), 0 1px 3px rgba(0, 0, 0, 0.04);
+            transition: transform 0.18s ease, box-shadow 0.2s;
+            border: 1px solid #eef2f8;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.06);
+        }
+
+        .card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.8rem;
+            font-weight: 500;
+            border-left: 4px solid #3b82f6;
+            padding-left: 0.8rem;
+        }
+
+        .card p {
+            color: #2f4058;
+            font-size: 0.97rem;
+        }
+
+        .card .tag {
+            display: inline-block;
+            background: #eef2f8;
+            color: #1f2a3e;
+            font-size: 0.75rem;
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+            margin-top: 0.8rem;
+        }
+
+        /* 说明区 */
+        .intro-section {
+            background: #ffffff;
+            padding: 2rem 2rem 2.4rem;
+            border-radius: 24px;
+            margin: 2rem 0 2.8rem;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+            border: 1px solid #e6ecf3;
+        }
+
+        .intro-section h2 {
+            font-weight: 500;
+            font-size: 1.6rem;
+            margin-bottom: 1.2rem;
+            color: #0e1a28;
+        }
+
+        .intro-section p {
+            margin-bottom: 1rem;
+            color: #2b3b50;
+        }
+
+        .intro-section a {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px dotted #3b82f6;
+        }
+
+        .intro-section a:hover {
+            color: #1d4ed8;
+            border-bottom: 1px solid #1d4ed8;
+        }
+
+        .highlight-link {
+            background: #f0f5ff;
+            padding: 0.2rem 0.4rem;
+            border-radius: 6px;
+        }
+
+        /* 提示区 */
+        .tips-box {
+            background: #e9f0fa;
+            border-left: 5px solid #3b82f6;
+            padding: 1.6rem 2rem;
+            border-radius: 18px;
+            margin: 2.5rem 0;
+        }
+
+        .tips-box h3 {
+            font-weight: 500;
+            font-size: 1.15rem;
+            margin-bottom: 0.6rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .tips-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .tips-box li {
+            padding: 0.4rem 0;
+            display: flex;
+            gap: 0.6rem;
+            align-items: baseline;
+        }
+
+        .tips-box li::before {
+            content: "▹";
+            color: #2563eb;
+            font-weight: 500;
+        }
+
+        /* 相关信息区 (FAQ 摘要) */
+        .info-area {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.8rem;
+            margin: 2.8rem 0 2rem;
+        }
+
+        .info-block {
+            flex: 1 1 280px;
+            background: #ffffff;
+            padding: 1.6rem 1.8rem;
+            border-radius: 20px;
+            border: 1px solid #e4eaf2;
+        }
+
+        .info-block h4 {
+            font-weight: 500;
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+            color: #0e1a28;
+        }
+
+        .info-block p {
+            font-size: 0.95rem;
+            color: #2d405a;
+        }
+
+        .info-block .q {
+            font-weight: 500;
+            color: #1e293b;
+        }
+
+        /* 底部 */
+        .footer-note {
+            text-align: center;
+            padding: 2rem 0 0.8rem;
+            border-top: 1px solid #dce2ec;
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: #4a5b72;
+        }
+
+        .footer-note a {
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+        .footer-note a:hover {
+            text-decoration: underline;
+        }
+
+        /* 响应式 */
+        @media (max-width: 860px) {
+            .grid-3 {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .grid-3 {
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+            }
+            .hero {
+                padding: 3.5rem 1.2rem 2.8rem;
+            }
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            .container {
+                padding: 1.5rem 1rem 3rem;
+            }
+            .intro-section {
+                padding: 1.5rem;
+            }
+            .tips-box {
+                padding: 1.2rem 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 深色头图 -->
+    <header class="hero">
+        <h1><span>pg游戏</span> · 知识库</h1>
+        <p>从这里开始了解 pg游戏 的核心信息、常见问题与实用指引。不绕弯，不夸大，只呈现真实可用的内容。</p>
+        <div class="badge">📋 信息页 · 持续更新</div>
+    </header>
+
+    <div class="container">
+
+        <!-- 目录感布局：三个卡片，像知识库入口 -->
+        <div class="grid-3">
+            <div class="card">
+                <h3>🔍 网站定位</h3>
+                <p>pg游戏 是一个为玩家提供游戏资讯、玩法解析及平台导航的综合站点。内容覆盖热门游戏动态与实用工具。</p>
+                <span class="tag">#游戏百科</span>
+            </div>
+            <div class="card">
+                <h3>🧩 内容类型</h3>
+                <p>攻略笔记、版本更新说明、活动分析、界面指引等。每篇文章均以玩家视角撰写，力求清晰中立。</p>
+                <span class="tag">#攻略 · 分析</span>
+            </div>
+            <div class="card">
+                <h3>📎 快速索引</h3>
+                <p>如果你正在寻找关于 pg游戏 的入门介绍或专题整理，本页提供了主要入口与参考线索。</p>
+                <span class="tag">#索引</span>
+            </div>
+        </div>
+
+        <!-- 说明区：从识别网站用途切入 -->
+        <div class="intro-section">
+            <h2>如何快速识别 <span style="font-weight:500;">pg游戏</span> 的用途？</h2>
+            <p>很多用户第一次来到 <a href="https://cn2-pg.com" class="highlight-link">pg游戏</a> 时，会先确认这个网站是否能满足自己的需求。简单来说：它是一个围绕游戏内容组织的信息节点，包含玩法说明、常见疑问、平台环境介绍等。不涉及商业推广或诱导性宣传，以实用信息为主。</p>
+            <p>如果你对某款游戏的机制感到困惑，或者想了解某个版本的变化，不妨先浏览网站内的知识条目。相比零散搜索，这里的内容更聚合，也更有条理。</p>
+            <p style="margin-bottom:0;">站内还设有交流向的提示版块与更新日志，方便长期关注的玩家随时回溯。建议新访客从「入门指南」分类开始翻阅。</p>
+        </div>
+
+        <!-- 提示区 -->
+        <div class="tips-box">
+            <h3>💡 使用提醒</h3>
+            <ul>
+                <li>本站所有内容均为信息整理与分享，不提供任何形式的充值、下载或第三方跳转服务。</li>
+                <li>部分页面包含外部参考链接，请根据自身判断甄别信息准确性。</li>
+                <li>如果你发现内容有误，或希望补充某个专题，可通过网站内联系方式反馈。</li>
+                <li>建议将 <a href="https://cn2-pg.com" style="color:#1d4ed8; text-decoration:underline;">pg游戏</a> 添加至书签，以便后续快速查阅更新。</li>
+            </ul>
+        </div>
+
+        <!-- 相关信息区（FAQ摘要） -->
+        <div class="info-area">
+            <div class="info-block">
+                <h4>❓ 常见疑问</h4>
+                <p><span class="q">Q：需要注册才能浏览内容吗？</span><br>不需要。所有文章和页面均开放阅读，无需登录。</p>
+                <p style="margin-top:0.8rem;"><span class="q">Q：内容更新频率如何？</span><br>通常每周会有 2~4 篇新文章或修订，重大版本更新时会额外补充。</p>
+            </div>
+            <div class="info-block">
+                <h4>📌 你可能想了解</h4>
+                <p>▸ 网站专注于中文游戏社区，所有内容均为原创或经授权的翻译整理。<br>
+                ▸ 不展示弹窗广告、不追踪用户行为。<br>
+                ▸ 如果你在寻找特定游戏的术语解释，可尝试站内搜索。</p>
+            </div>
+            <div class="info-block">
+                <h4>🧭 相关资源</h4>
+                <p>除主站 <a href="https://cn2-pg.com" style="color:#2563eb;text-decoration:underline;">pg游戏</a> 外，运营团队还维护一个轻量级的更新日志页面，记录每次变动。如果你对版本历史感兴趣，不妨留意首页底部的链接。</p>
+            </div>
+        </div>
+
+        <!-- 结尾 -->
+        <div class="footer-note">
+            <p>— 知识库入口 · 内容由社区与编辑共同维护 —<br>
+            <a href="https://cn2-pg.com">pg游戏</a> · 始于信息，忠于实用</p>
+        </div>
+
+    </div>
+</body>
+</html>
